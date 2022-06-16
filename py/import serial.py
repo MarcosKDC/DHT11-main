@@ -48,8 +48,10 @@ while 1:
         hora2 = date.strftime("%H:%M:%S")
         print(hora2)
         print (x)
-        if (input(keyboard.is_pressed('q')):
+        if (keyboard.is_pressed('q')):
+                ser2.write(bytes("La temperatura alcanzada, a las ",'utf-8'))
                 ser2.write(bytes(hora2,'utf-8'))
+                ser2.write(bytes(" es inadecuada",'utf-8'))
                 ser2.write(bytes('\r\n','utf-8'))
                 ser2.write (x)
                 print(ser2.readline())
