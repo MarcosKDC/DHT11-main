@@ -1,4 +1,4 @@
-#include <Arduino.h>
+//#include <Arduino.h>
 // DHT Temperature & Humidity Sensor
 // Unified Sensor Library Example
 // Written by Tony DiCola for Adafruit Industries

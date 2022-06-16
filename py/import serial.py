@@ -19,6 +19,10 @@ ser = serial.Serial(
         timeout=1
 )
 # Pause the program for 1 second to avoid overworking the serial port
+counter= 0
+# Pauses for one second each iteration to avoid overworking the port
 while 1:
+       # ser.write("Write counter: %d \n"%(counter))
+        counter += 1
         x=ser.readline()
         print (x)
