@@ -1,4 +1,3 @@
-//#include <Arduino.h>
 // DHT Temperature & Humidity Sensor
 // Unified Sensor Library Example
 // Written by Tony DiCola for Adafruit Industries
@@ -17,8 +16,8 @@
 // Pin 15 can work but DHT must be disconnected during program upload.
 
 // Uncomment the type of sensor in use:
-#define DHTTYPE    DHT11     // DHT 11
-//#define DHTTYPE    DHT22     // DHT 22 (AM2302)
+//#define DHTTYPE    DHT11     // DHT 11
+#define DHTTYPE    DHT22     // DHT 22 (AM2302)
 //#define DHTTYPE    DHT21     // DHT 21 (AM2301)
 
 // See guide for details on sensor wiring and usage:
@@ -31,7 +30,7 @@ uint32_t delayMS;
 void setup() {
   Serial.begin(9600);
   // Initialize device.
-  dht.begin(); 
+  dht.begin();
   Serial.println(F("DHTxx Unified Sensor Example"));
   // Print temperature sensor details.
   sensor_t sensor;
