@@ -1,3 +1,6 @@
+from datetime import datetime
+from time import time
+date=datetime.now
 import serial
 ser1 = serial.Serial(
         # Serial Port to read the data from
@@ -37,13 +40,14 @@ ser2 = serial.Serial(
         # Number of serial commands to accept before timing out
         timeout=1
 )
-# Pause the program for 1 second to avoid overworking the serial port
-counter= 0
-# Pauses for one second each iteration to avoid overworking the port
 while 1:
-       # ser.write("Write counter: %d \n"%(counter))
-        counter += 1
         x=ser1.readline()
+        date=datetime.now()
+        time = date.strftime("%H:%M:%S")
+        print(time)
         print (x)
-        ser2.write (x)
+        if (input("Clique botón para parar") != ""):
+                ser2.write(bytes(time,'utf-8'))
+                ser2.write(bytes('\r\n','utf-8'))
+                ser2.write (x)
         
