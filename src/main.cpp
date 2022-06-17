@@ -34,6 +34,26 @@ void setup() {
   dht.begin(); 
   // Serial.println(F("DHTxx Unified Sensor Example"));
   // Print temperature sensor details.
+  byte flag=0;
+  pinMode(LED_BUILTIN, OUTPUT);
+
+  while (flag==0) //while signal not received
+  {
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
+  delay(100);
+  digitalWrite(LED_BUILTIN,LOW);          
+    if (Serial.available() > 0) { // if there's any incoming byte
+    flag = Serial.read();   // read the incoming byte and assign to flag
+    for (int i=0; i<=5;i++){
+      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
+      delay(500);                       // wait for half a second
+      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off 
+      delay(500);
+      }
+    }
+  }
+  Serial.println(F("1111"));
+  Serial.println(F("1111"));
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
   Serial.print  (F("Sensor Type: ")); Serial.println(sensor.name);
@@ -54,6 +74,8 @@ void setup() {
   Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("%"));
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
+  Serial.println(F("1111"));
+  Serial.println(F("1111"));
   // Set delay between sensor readings based on sensor details.
   delayMS = sensor.min_delay / 1000;
 }
