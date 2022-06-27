@@ -41,7 +41,8 @@ void setup() {
   {
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
   delay(100);
-  digitalWrite(LED_BUILTIN,LOW);          
+  digitalWrite(LED_BUILTIN,LOW);   
+  delay(100);       
     if (Serial.available() > 0) { // if there's any incoming byte
     flag = Serial.read();   // read the incoming byte and assign to flag
     for (int i=0; i<=5;i++){
@@ -52,8 +53,6 @@ void setup() {
       }
     }
   }
-  Serial.println(F("1111"));
-  Serial.println(F("1111"));
   sensor_t sensor;
   dht.temperature().getSensor(&sensor);
   Serial.print  (F("Sensor Type: ")); Serial.println(sensor.name);
@@ -74,34 +73,43 @@ void setup() {
   Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("%"));
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
-  Serial.println(F("1111"));
-  Serial.println(F("1111"));
+  Serial.println(F("11111111"));
+  Serial.println(F("Hora [HH:MM:SS]; Temperatura[ºC];  Humedad[%];  OK?[I/O]"));
   // Set delay between sensor readings based on sensor details.
   delayMS = sensor.min_delay / 1000;
+
 }
 
 void loop() {
   // Delay between measurements.
   delay(delayMS);
-  // Get temperature event and print its value.
+  // Get temperature and humidity event
   sensors_event_t event;
   dht.temperature().getEvent(&event);
-  if (isnan(event.temperature)) {
-    Serial.println(F("Error reading temperature!"));
-  }
-  else {
-    Serial.print(F("Temperature: "));
-    Serial.print(event.temperature);
-    Serial.println(F("°C"));
-  }
-  // Get humidity event and print its value.
+  float temp=0;
+  temp= event.temperature;
   dht.humidity().getEvent(&event);
-  if (isnan(event.relative_humidity)) {
-    Serial.println(F("Error reading humidity!"));
+  float humedad=0;
+  humedad= event.relative_humidity;
+  
+  if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
+    Serial.print(F("ERROR"));
+    Serial.print(F(";"));
+    Serial.print(F("ERROR"));
+    Serial.println(F("0"));
   }
-  else {
-    Serial.print(F("Humidity: "));
-    Serial.print(event.relative_humidity);
-    Serial.println(F("%"));
+  else {// Else, print values
+    Serial.print(temp);
+    Serial.print(F(" ;"));
+    Serial.print(humedad);
+    Serial.print(F(" ;"));
+    if(temp>27 || temp<17  || humedad>70 || event.relative_humidity<50 ) //If values are out of legal range, set alarm
+    {
+     Serial.println(F(" 1"));
+    }
+    else
+    {
+      Serial.println(F(" 0"));
+    }
   }
 }

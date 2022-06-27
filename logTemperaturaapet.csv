@@ -1,7 +1,5 @@
-Friday, 17. June 2022
-15:03:07
-1111
-1111
+Monday, 27. June 2022
+16:41:16
 Sensor Type: DHT11
 ------------------------------------
 Temperature Sensor
@@ -14,172 +12,140 @@ Max Value:   80.00%
 Min Value:   20.00%
 Resolution:  5.00%
 ------------------------------------
-1111
-1111
-Temperature: 26.60°C
-Humidity: 70.00%
-Temperature: 26.60°C
-Humidity: 70.00%
-Temperature: 26.60°C
-Humidity: 66.00%
-Temperature: 26.60°C
-Humidity: 66.00%
-Temperature: 26.60°C
-Humidity: 69.00%
-Temperature: 26.60°C
-Humidity: 69.00%
-Temperature: 26.60°C
-Humidity: 69.00%
-Temperature: 26.60°C
-Humidity: 69.00%
-Temperature: 26.60°C
-Humidity: 69.00%
-Temperature: 26.60°C
-Humidity: 69.00%
-Temperature: 26.70°C
-Humidity: 69.00%
-Temperature: 26.70°C
-Humidity: 69.00%
-Temperature: 26.70°C
-Humidity: 69.00%
-Temperature: 26.70°C
-Humidity: 69.00%
-Temperature: 26.70°C
-Humidity: 70.00%
-Temperature: 26.70°C
-Humidity: 70.00%
-Temperature: 26.70°C
-Humidity: 70.00%
-Temperature: 26.70°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 70.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
-Humidity: 69.00%
-Temperature: 26.80°C
+11111111
+Temperature[ºC];  Humidity[%];  Legal[I/O]
+24.30 ;55.00 ; 0
+24.30 ;55.00 ; 0
+24.10 ;50.00 ; 0
+24.10 ;50.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;56.00 ; 0
+24.10 ;57.00 ; 0
+24.10 ;57.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0
+24.20 ;56.00 ; 0

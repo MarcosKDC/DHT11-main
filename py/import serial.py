@@ -19,59 +19,49 @@ nombre=nombre+'.csv'
 
 cabecera=0
 x=0
-while not(keyboard.is_pressed("q")): #mientras no pulses q
+while (True): #mientras no pulses q
 
         date=datetime.now() #lee la fecha
         dia= date.strftime("%A, %d. %B %Y")#fecha -> dia string
         hora = date.strftime("%H:%M:%S") #fecha -> hora string
         print(hora) #printea la hora
 
-        if(os.path.exists(nombre) and cabecera==2): #si el archivo existe y acabó la cabecera
+        if(os.path.exists(nombre) and cabecera==1): #si el archivo existe y acabó la cabecera
                 file1 = open(nombre, 'a') #abre el archivo en modo append
 
                 file1.write(hora)
-                file1.write('\n')             
-           
+                file1.write(';')             
                 x=ser1.readline() #lee el serial y guardalo en x
                 x=x.decode("utf-8") #conviertelo a string
                 file1.write(x)  
-                x=ser1.readline() #lee el serial y guardalo en x
-                x=x.decode("utf-8") #conviertelo a string
-                file1.write(x)  
-
+                file1.write('\n')   
                 file1.close() 
                 
         else: # si el archivo no existe espera a que cliques enter, manda la señal de arranque al setup del arduino  y crea la cabecera,
                 file1 = open(nombre, 'w') #abre el archivo
-        
                 file1.write(dia)
                 file1.write('\n')
                 file1.close()  
-
                 file1 = open(nombre, 'a') #abre el archivo en modo append
                 file1.write(hora)# escribe la hora
                 file1.write('\n')
                 file1.close() 
  
                 input("Reset Arduino and Click Enter")
-
                 ser1.write(bytes('00000001','utf-8')) #envía la señal de encendido al puerto serie
                 while cabecera==0:
-                        x_ant=x
                         x=ser1.readline() #lee el serial y guardalo en x
                         x=x.decode("utf-8") #conviertelo a string 
-                        if  x_ant== x: #si llega inicio cabecera
-                                cabecera==1
-                                x=ser1.readline() #lee el serial y guardalo en x
-                                x=x.decode("utf-8") #conviertelo a string 
-                                print(x)
-                                while x_ant !=x:
-                                        file1 = open(nombre, 'a') #abre el archivo en modo append
-                                        file1.write(x)   
-                                        x=ser1.readline() #lee el serial y guardalo en x
-                                        x=x.decode("utf-8") #conviertelo a string 
-                                        file1.close
-                                       
+                        print(x)
+                        if  x== "11111111": #si llega final cabecera
+                                 cabecera==1
+                        else:
+                                file1 = open(nombre, 'a') #abre el archivo en modo append
+                                file1.write(x)   
+                                file1.close
+                        
+                               
+                                        
                 
                
       
