@@ -39,17 +39,14 @@ void setup() {
 
   while (flag==0) //while signal not received
   {
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
-  delay(100);
-  digitalWrite(LED_BUILTIN,LOW);   
-  delay(100);       
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on     
     if (Serial.available() > 0) { // if there's any incoming byte
     flag = Serial.read();   // read the incoming byte and assign to flag
     for (int i=0; i<=5;i++){
+      delay(500);
       digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
       delay(500);                       // wait for half a second
       digitalWrite(LED_BUILTIN, LOW);    // turn the LED off 
-      delay(500);
       }
     }
   }
@@ -73,9 +70,8 @@ void setup() {
   Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("%"));
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
+  Serial.println(F("11111111")); //Manda la señal de arranque
   Serial.println(F("Hora [HH:MM:SS]; Temperatura[ºC];  Humedad[%];  OK?[I/O]"));
-  Serial.println(F("11111111"));
-
   // Set delay between sensor readings based on sensor details.
   delayMS = sensor.min_delay / 1000;
 
@@ -101,9 +97,9 @@ void loop() {
   }
   else {// Else, print values
     Serial.print(temp);
-    Serial.print(F(" ;"));
+    Serial.print(F("; "));
     Serial.print(humedad);
-    Serial.print(F(" ;"));
+    Serial.print(F("; "));
     if(temp>27 || temp<17  || humedad>70 || event.relative_humidity<50 ) //If values are out of legal range, set alarm
     {
      Serial.println(F(" 1"));
