@@ -14,7 +14,7 @@ ser1 = serial.Serial( #DEFINICIÓN DEL PUERTO SERIe A UTILIZAR
 )
 
 nombre='logTemperatura'
-nombre=nombre+input('Inserta nombre     ') #define el nombre del log
+nombre=nombre+input('Inserta nombre: ') #define el nombre del log
 nombre=nombre+'.csv'
 
 cabecera=0 #flag para saber si acabó la cabecera
@@ -31,14 +31,15 @@ while (True): #mientras no pulses q
         hora = date.strftime('%H:%M:%S') #fecha -> hora string
 
         if(os.path.exists(nombre) and cabecera==1): #si el archivo existe y acabó la cabecera
-         file1 = open(nombre, 'a') #abre el archivo en modo append
-         file1.write(hora) #escribe la hora en la primera linea
-         file1.write('; ')             
-         x=ser1.readline() #lee el serial y guardalo en x
-         x=x.decode('utf-8') #convierte x a string
-         file1.write(x)  #escribe x (datos recibidos de arduino)
-         file1.write('\n')   #siguiente línea
-         file1.close() 
+                 if(ser1.in_waiting>0):
+                         file1 = open(nombre, 'a') #abre el archivo en modo append
+                         x=ser1.readline() #lee el serial y guardalo en x
+                         file1.write(hora) #escribe la hora en la primera linea
+                         file1.write('; ')             
+                         x=x.decode('utf-8') #convierte x a string
+                         file1.write(x)  #escribe x (datos recibidos de arduino)
+                         file1.write('\n')   #siguiente línea
+                         file1.close() 
                 
         else: # si el archivo no existe espera a que cliques enter, manda la señal de arranque al setup del arduino  y crea la cabecera,
                
@@ -59,11 +60,8 @@ while (True): #mientras no pulses q
                 file1.write(hora)
                 file1.write('\n')
                 file1.close() 
-                print("Fecha:") #Printea Fecha y hora de inicio
-                print(dia)
-                print("Hora de Inicio:")
-                print(hora)
-                
+                print("Fecha:   ",dia) #Printea Fecha y hora de inicio
+                print("Hora de Inicio:  ",hora)
 
                 while cabecera==0: #mientras no se active el flag de cabecera
                         x=ser1.readline() #lee el serial y guardalo en x

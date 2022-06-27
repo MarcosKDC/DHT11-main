@@ -43,9 +43,9 @@ void setup() {
     if (Serial.available() > 0) { // if there's any incoming byte
     flag = Serial.read();   // read the incoming byte and assign to flag
     for (int i=0; i<=5;i++){
-      delay(500);
+      delay(100);
       digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
-      delay(500);                       // wait for half a second
+      delay(100);                       // wait for half a second
       digitalWrite(LED_BUILTIN, LOW);    // turn the LED off 
       }
     }
