@@ -73,8 +73,9 @@ void setup() {
   Serial.print  (F("Min Value:   ")); Serial.print(sensor.min_value); Serial.println(F("%"));
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
-  Serial.println(F("11111111"));
   Serial.println(F("Hora [HH:MM:SS]; Temperatura[ºC];  Humedad[%];  OK?[I/O]"));
+  Serial.println(F("11111111"));
+
   // Set delay between sensor readings based on sensor details.
   delayMS = sensor.min_delay / 1000;
 
