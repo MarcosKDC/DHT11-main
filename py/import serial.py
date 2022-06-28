@@ -27,7 +27,7 @@ on=True
 while (True): #mientras no pulses q
         if(keyboard.is_pressed('up')):
                  on=True
-        while(on):
+        if(on):
                 if(keyboard.is_pressed('down')):
                         on=False
                 date=datetime.now() #lee la fecha
@@ -50,9 +50,8 @@ while (True): #mientras no pulses q
                 
                         
                         input('Wait for Arduino LED and Click Enter')#espera a que el usuario clique enter
-                        ser1.write(bytes('00000001','utf-8')) #envía la señal de arranque alarduino vía puerto serie 
+                        ser1.write(bytes('00000001','utf-8')) #envía la señal de arranque alarduino vía puerto serie
                         print("Señal de arranque enviada")
-
 
                         file1 = open(nombre, 'w') #abre el archivo en modo write (si existe sobreescribe)
                         
@@ -83,7 +82,8 @@ while (True): #mientras no pulses q
                                 else: #de lo contrario, printea la cabecera
                                         x=x.decode('utf-8') #conviertelo a string
                                         print(x)
-                      
+        else:
+                ser1.write(bytes('00000001','utf-8'))
                       
                         
                                

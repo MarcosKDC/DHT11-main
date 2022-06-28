@@ -78,39 +78,45 @@ void setup() {
 }
 
 void loop() {
-  // Delay between measurements.
-  delay(delayMS);
-  // Get temperature and humidity event
+      // Delay between measurements.
+      if(Serial.available()>0){
+      digitalWrite(LED_BUILTIN, HIGH);  
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW); 
+      delay(500);
+      }
+      delay(delayMS);
+      // Get temperature and humidity event
 
-  sensors_event_t event;
+      sensors_event_t event;
 
-  dht.temperature().getEvent(&event);
-  float temp=0;
-  temp= event.temperature;
-  temp=temp-0.7;//ajustamos 0.7ºC de diferencia respecto termometro comercial
-  dht.humidity().getEvent(&event);
-  float humedad=0;
-  humedad= event.relative_humidity;
-  humedad=humedad-16;//ajustamos 16% de diferencia respecto termometro comercial
-  
-  if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
-    Serial.print(F("ERROR"));
-    Serial.print(F(";"));
-    Serial.print(F("ERROR"));
-    Serial.println(F("0"));
+      dht.temperature().getEvent(&event);
+      float temp=0;
+      temp= event.temperature;
+      temp=temp-0.7;//ajustamos 0.7ºC de diferencia respecto termometro comercial
+      dht.humidity().getEvent(&event);
+      float humedad=0;
+      humedad= event.relative_humidity;
+      humedad=humedad-16;//ajustamos 16% de diferencia respecto termometro comercial
+
+      if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
+        Serial.print(F("ERROR"));
+        Serial.print(F(";"));
+        Serial.print(F("ERROR"));
+        Serial.println(F("0"));
+      }
+      else {// Else, print values
+        Serial.print(temp);
+        Serial.print(F("; "));
+        Serial.print(humedad);
+        Serial.print(F("; "));
+        if(temp>28.0 || temp<16.0  || humedad>70.0 || event.relative_humidity<30.0 ) //If values are out of legal range, set alarm
+        {
+          Serial.println(F(" 1"));
+        }
+        else
+        {
+          Serial.println(F(" 0"));
+        }
+      }
   }
-  else {// Else, print values
-    Serial.print(temp);
-    Serial.print(F("; "));
-    Serial.print(humedad);
-    Serial.print(F("; "));
-    if(temp>28.0 || temp<16.0  || humedad>70.0 || event.relative_humidity<30.0 ) //If values are out of legal range, set alarm
-    {
-     Serial.println(F(" 1"));
-    }
-    else
-    {
-      Serial.println(F(" 0"));
-    }
-  }
-}
