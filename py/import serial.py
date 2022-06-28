@@ -14,52 +14,72 @@ ser1 = serial.Serial( #DEFINICIÓN DEL PUERTO SERIe A UTILIZAR
 )
 
 nombre='logTemperatura'
-nombre=nombre+input('Inserta nombre     ') #define el nombre del log
+nombre=nombre+input('Inserta nombre: ') #define el nombre del log
 nombre=nombre+'.csv'
 
-cabecera=0
-x=0
+cabecera=0 #flag para saber si acabó la cabecera
+x=0 #variable para las lecturas
+s="11111111\r\n" #señal de inicio de cabecera
+s=s.encode("utf-8")     #codificamos en bits para la comparación
+
+
+
 while (True): #mientras no pulses q
 
         date=datetime.now() #lee la fecha
         dia= date.strftime('%A, %d. %B %Y')#fecha -> dia string
         hora = date.strftime('%H:%M:%S') #fecha -> hora string
-        print(hora) #printea la hora
 
         if(os.path.exists(nombre) and cabecera==1): #si el archivo existe y acabó la cabecera
-         file1 = open(nombre, 'a') #abre el archivo en modo append
-         file1.write(hora)
-         file1.write(';')             
-         x=ser1.readline() #lee el serial y guardalo en x
-         x=x.decode('utf-8') #conviertelo a string
-         file1.write(x)  
-         file1.write('\n')   
-         file1.close() 
+                 if(ser1.in_waiting>0):
+                         file1 = open(nombre, 'a') #abre el archivo en modo append
+                         x=ser1.readline() #lee el serial y guardalo en x
+                         file1.write(hora) #escribe la hora en la primera linea
+                         file1.write('; ')             
+                         x=x.decode('utf-8') #convierte x a string
+                         file1.write(x)  #escribe x (datos recibidos de arduino)
+                         file1.write('\n')   #siguiente línea
+                         file1.close() 
                 
         else: # si el archivo no existe espera a que cliques enter, manda la señal de arranque al setup del arduino  y crea la cabecera,
-                file1 = open(nombre, 'w') #abre el archivo
-                file1.write(dia)
-                file1.write('\n')
+               
+                       
+                input('Wait for Arduino LED and Click Enter')#espera a que el usuario clique enter
+                ser1.write(bytes('00000001','utf-8')) #envía la señal de arranque alarduino vía puerto serie 
+                print("Señal de arranque enviada")
+
+
+                file1 = open(nombre, 'w') #abre el archivo en modo write (si existe sobreescribe)
+                      
+                file1.write("Día;       ")        #escribe el día
+                file1.write(dia) 
                 file1.close()  
+               
                 file1 = open(nombre, 'a') #abre el archivo en modo append
-                file1.write(hora)# escribe la hora
+                file1.write(";  Hora de Inicio;    ")# escribe la hora
+                file1.write(hora)
                 file1.write('\n')
                 file1.close() 
- 
-                input('Reset Arduino and Click Enter')
-                ser1.write(bytes('00000001','utf-8')) #envía la señal de encendido al puerto serie
-                while cabecera==0:
+                print("Fecha:   ",dia) #Printea Fecha y hora de inicio
+                print("Hora de Inicio:  ",hora)
+
+                while cabecera==0: #mientras no se active el flag de cabecera
                         x=ser1.readline() #lee el serial y guardalo en x
-                        print(x)
-                        x=x.decode('utf-8') #conviertelo a string 
-                        print(x)
-                        if  x== 11111111: #si llega final cabecera
-                                 cabecera==1
-                        else:
-                                
+                        if  x==s : #si x es la señal de final de cabecera
+                                cabecera=1 #activa el flag
+                                x=ser1.readline() #lee el serial y guardalo en x
+                                x=x.decode('utf-8') #conviertelo a string 
+                                print("Se ha finalizado el setup, comienza el log")
                                 file1 = open(nombre, 'a') #abre el archivo en modo append
                                 file1.write(x)   
                                 file1.close
+                        else: #de lo contrario, printea la cabecera
+                              
+                               x=x.decode('utf-8') #conviertelo a string 
+                               
+                               print(x)
+                      
+                      
                         
                                
                                         
