@@ -71,23 +71,27 @@ void setup() {
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
   Serial.println(F("11111111")); //Manda la señal de arranque
-  Serial.println(F("Hora [HH:MM:SS]; Temperatura[ºC];  Humedad[%];  OK?[I/O]"));
+  Serial.println(F("Hora [HH:MM:SS]; Temperatura[Celsius];  Humedad[%];  OK?[I/O]"));
   // Set delay between sensor readings based on sensor details.
   delayMS = sensor.min_delay / 1000;
-
+  
 }
 
 void loop() {
   // Delay between measurements.
   delay(delayMS);
   // Get temperature and humidity event
+
   sensors_event_t event;
+
   dht.temperature().getEvent(&event);
   float temp=0;
   temp= event.temperature;
+  temp=temp-0.7;//ajustamos 1ºC de diferencia respecto termometro comercial
   dht.humidity().getEvent(&event);
   float humedad=0;
   humedad= event.relative_humidity;
+  humedad=humedad-15;//ajustamos 15% de diferencia respecto termometro comercial
   
   if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
     Serial.print(F("ERROR"));
@@ -100,7 +104,7 @@ void loop() {
     Serial.print(F("; "));
     Serial.print(humedad);
     Serial.print(F("; "));
-    if(temp>27 || temp<17  || humedad>70 || event.relative_humidity<50 ) //If values are out of legal range, set alarm
+    if(temp>28.0 || temp<16.0  || humedad>70.0 || event.relative_humidity<30.0 ) //If values are out of legal range, set alarm
     {
      Serial.println(F(" 1"));
     }

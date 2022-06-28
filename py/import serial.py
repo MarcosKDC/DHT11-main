@@ -24,7 +24,7 @@ s=s.encode("utf-8")     #codificamos en bits para la comparación
 
 
 
-while (True): #mientras no pulses q
+while (not(keyboard.is_pressed(spacebar)): #mientras no pulses q
 
         date=datetime.now() #lee la fecha
         dia= date.strftime('%A, %d. %B %Y')#fecha -> dia string
@@ -51,7 +51,7 @@ while (True): #mientras no pulses q
 
                 file1 = open(nombre, 'w') #abre el archivo en modo write (si existe sobreescribe)
                       
-                file1.write("Día;       ")        #escribe el día
+                file1.write("Dia;       ")        #escribe el día
                 file1.write(dia) 
                 file1.close()  
                
