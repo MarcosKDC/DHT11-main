@@ -38,6 +38,7 @@ while (True): #mientras no pulses q
                         if(ser1.in_waiting>0):
                                 file1 = open(nombre, 'a') #abre el archivo en modo append
                                 x=ser1.readline() #lee el serial y guardalo en x
+                                x=x.strip()
                                 file1.write(hora) #escribe la hora en la primera linea
                                 file1.write('; ')             
                                 x=x.decode('utf-8') #convierte x a string
@@ -72,10 +73,12 @@ while (True): #mientras no pulses q
                                 if  x==s : #si x es la señal de final de cabecera
                                         cabecera=1 #activa el flag
                                         x=ser1.readline() #lee el serial y guardalo en x
+                                        x=x.strip()
                                         x=x.decode('utf-8') #conviertelo a string 
                                         print("Se ha finalizado el setup, comienza el log")
                                         file1 = open(nombre, 'a') #abre el archivo en modo append
                                         file1.write(x)   #printea la cabecera
+                                        file1.write('\n') 
                                         file1.close
                                 else: #de lo contrario, printea la cabecera
                                         x=x.decode('utf-8') #conviertelo a string

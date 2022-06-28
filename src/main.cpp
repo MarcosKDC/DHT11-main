@@ -87,11 +87,11 @@ void loop() {
   dht.temperature().getEvent(&event);
   float temp=0;
   temp= event.temperature;
-  temp=temp-0.6;//ajustamos 0.6ºC de diferencia respecto termometro comercial
+  temp=temp-0.7;//ajustamos 0.7ºC de diferencia respecto termometro comercial
   dht.humidity().getEvent(&event);
   float humedad=0;
   humedad= event.relative_humidity;
-  humedad=humedad-17;//ajustamos 17% de diferencia respecto termometro comercial
+  humedad=humedad-16;//ajustamos 16% de diferencia respecto termometro comercial
   
   if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
     Serial.print(F("ERROR"));
