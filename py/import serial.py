@@ -24,7 +24,7 @@ s=s.encode("utf-8")     #codificamos en bits para la comparación
 
 
 
-while (not(keyboard.is_pressed(spacebar)): #mientras no pulses q
+while (not(keyboard.is_pressed(' '))): #mientras no pulses q
 
         date=datetime.now() #lee la fecha
         dia= date.strftime('%A, %d. %B %Y')#fecha -> dia string
