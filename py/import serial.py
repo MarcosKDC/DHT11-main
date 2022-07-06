@@ -32,7 +32,7 @@ while (True): #mientras no pulses q
         if(keyboard.is_pressed('up')):
                  on=True
         if(on):
-                if(keyboard.is_pressed('down')):
+                if(keyboard.is_pressed('down') and keyboard.is_pressed('left') and keyboard.is_pressed('right')):
                         on=False
                 date=datetime.now() #lee la fecha
                 dia= date.strftime('%A, %d. %B %Y')#fecha -> dia string
@@ -56,13 +56,13 @@ while (True): #mientras no pulses q
                                 tiempo=round(float(hora)+float(minuto)/60+float(segundo)/3600,3)
                                 print(tiempo)
                                 graphx.append(tiempo)
-                                print(graphx)
+                                ##print(graphx)
                                 graphtemp.append(float(data[0]))
-                                print(graphtemp)
+                                ##print(graphtemp)
                                 graphhum.append(float(data[1]))
-                                print(graphhum)
+                                ##print(graphhum)
                                 plt.plot(np.array(graphx),np.array(graphtemp),'k-')
-                                plt.plot(np.array(graphx),np.array(graphhum),'g-')
+                                ##plt.plot(np.array(graphx),np.array(graphhum),'g-')
                                 plt.show()
                                 plt.pause(0.1)
                 else: # si el archivo no existe espera a que cliques enter, manda la señal de arranque al setup del arduino  y crea la cabecera,
@@ -102,6 +102,8 @@ while (True): #mientras no pulses q
                                         x=x.decode('utf-8') #conviertelo a string
                                         print(x)
         else:
+                plt.show()
+                plt.pause(1)
                 ser1.write(bytes('00000001','utf-8'))
                       
                         

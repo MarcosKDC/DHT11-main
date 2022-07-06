@@ -79,12 +79,6 @@ void setup() {
 
 void loop() {
       // Delay between measurements.
-      if(Serial.available()>0){
-      digitalWrite(LED_BUILTIN, HIGH);  
-      delay(500);
-      digitalWrite(LED_BUILTIN, LOW); 
-      delay(500);
-      }
       delay(delayMS);
       // Get temperature and humidity event
 
