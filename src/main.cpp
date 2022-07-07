@@ -27,14 +27,15 @@
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 uint32_t delayMS;
-
+  uint8_t flag=0;
+  long tiempo=0;
 void setup() {
   Serial.begin(9600);
   // Initialize device.
   dht.begin(); 
   // Serial.println(F("DHTxx Unified Sensor Example"));
   // Print temperature sensor details.
-  byte flag=0;
+  flag=0;
   pinMode(LED_BUILTIN, OUTPUT);
 
   while (flag==0) //while signal not received
@@ -73,44 +74,53 @@ void setup() {
   Serial.println(F("11111111")); //Manda la señal de arranque
   Serial.println(F("Hora [HH:MM:SS]; Temperatura[Celsius];  Humedad[%];  OK?[I/O]"));
   // Set delay between sensor readings based on sensor details.
-  delayMS = sensor.min_delay / 1000;
+  delayMS = sensor.min_delay/1000;
   
 }
 
 void loop() {
-      // Delay between measurements.
-      delay(delayMS);
-      // Get temperature and humidity event
-
-      sensors_event_t event;
-
-      dht.temperature().getEvent(&event);
-      float temp=0;
-      temp= event.temperature;
-      temp=temp-0.7;//ajustamos 0.7ºC de diferencia respecto termometro comercial
-      dht.humidity().getEvent(&event);
-      float humedad=0;
-      humedad= event.relative_humidity;
-      humedad=humedad-16;//ajustamos 16% de diferencia respecto termometro comercial
-
-      if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
-        Serial.print(F("ERROR"));
-        Serial.print(F(";"));
-        Serial.print(F("ERROR"));
-        Serial.println(F("0"));
+  while(Serial.available()>0){
+      flag=Serial.read();
+     }
+      if(flag>=1 && (millis()-tiempo)>delayMS){
+          tiempo=millis();
+          delay(delayMS);// Delay between measurements.
+          sensors_event_t event;// Get temperature and humidity event
+          dht.temperature().getEvent(&event);
+          float temp=0;
+          temp= event.temperature;
+          temp=temp-0.7;//ajustamos 0.7ºC de diferencia respecto termometro comercial
+          dht.humidity().getEvent(&event);
+          float humedad=0;
+          humedad= event.relative_humidity;
+          humedad=humedad-16;//ajustamos 16% de diferencia respecto termometro comercial}
+          if (isnan(event.temperature)||isnan (event.relative_humidity)) {// If can't read, display error
+              Serial.print(F("ERROR ;"));
+              Serial.print(F("ERROR ;"));
+              Serial.println(F("0"));
+          }
+          else {// Else, print values
+              Serial.print(temp);
+              Serial.print(F("; "));
+              Serial.print(humedad);
+              Serial.print(F("; "));
+              if(temp>28.0 || temp<16.0  || humedad>70.0 || event.relative_humidity<30.0 ){ //If values are out of legal range, set alarm
+              Serial.println(F(" 1"));
+              }
+              else{
+              Serial.println(F(" 0"));
+              }
+          }
       }
-      else {// Else, print values
-        Serial.print(temp);
-        Serial.print(F("; "));
-        Serial.print(humedad);
-        Serial.print(F("; "));
-        if(temp>28.0 || temp<16.0  || humedad>70.0 || event.relative_humidity<30.0 ) //If values are out of legal range, set alarm
-        {
-          Serial.println(F(" 1"));
-        }
-        else
-        {
-          Serial.println(F(" 0"));
-        }
+      if(flag==0){
+      Serial.print(F("STOP"));
+      Serial.print(F(";"));
+      Serial.print(flag);
+      Serial.print(F(";"));
+      Serial.println(F("0"));
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
+      delay(500);                       // wait for half a second
+      digitalWrite(LED_BUILTIN, LOW);    // turn the LED off 
       }
-  }
+}

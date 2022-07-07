@@ -1,5 +1,6 @@
 from datetime import datetime
 from time import sleep, strftime, time
+from tokenize import cookie_re
 import keyboard
 import serial
 import os.path
@@ -20,7 +21,7 @@ nombre=nombre+'.csv'
 
 cabecera=0 #flag para saber si acabó la cabecera
 x=0 #variable para las lecturas
-s="11111111\r\n" #señal de inicio de cabecera
+s= "11111111\r\n" #señal de inicio de cabecera
 s=s.encode("utf-8")     #codificamos en bits para la comparación
 on=True
 data=[]
@@ -29,24 +30,25 @@ graphtemp=[]
 graphhum=[]
 plt.ion()
 while (True): #mientras no pulses q
+        ser1.flush()
         if(keyboard.is_pressed('up')):
                  on=True
         if(on):
+                ser1.write(bytes(chr(1),'utf-8'))
                 if(keyboard.is_pressed('down') and keyboard.is_pressed('left') and keyboard.is_pressed('right')):
                         on=False
                 date=datetime.now() #lee la fecha
                 dia= date.strftime('%A, %d. %B %Y')#fecha -> dia string
                 reloj = date.strftime('%H:%M:%S') #fecha -> reloj string
-
-                if(os.path.exists(nombre) and cabecera==1): #si el archivo existe y acabó la cabecera
-                        if(ser1.in_waiting>0):
+                if(cabecera==1): #si el archivo existe y acabó la cabecera
+                        while(ser1.in_waiting>0):
                                 file1 = open(nombre, 'a') #abre el archivo en modo append
                                 x=ser1.readline() #lee el serial y guardalo en x
+                                ser1.flushInput()
                                 x=x.strip()
                                 file1.write(reloj) #escribe la reloj en la primera linea
                                 file1.write('; ')             
                                 x=x.decode('utf-8') #convierte x a string
-                               
                                 file1.write(x)  #escribe x (datos recibidos de arduino)
                                 file1.write('\n')   #siguiente línea
                                 file1.close() 
@@ -54,38 +56,35 @@ while (True): #mientras no pulses q
                                 [hora,minuto,segundo]= reloj.split(':')
 
                                 tiempo=round(float(hora)+float(minuto)/60+float(segundo)/3600,3)
-                                print(tiempo)
-                                graphx.append(tiempo)
-                                ##print(graphx)
-                                graphtemp.append(float(data[0]))
-                                ##print(graphtemp)
-                                graphhum.append(float(data[1]))
-                                ##print(graphhum)
+                                try:
+                                        graphtemp.append(float(data[0]))
+                                        graphhum.append(float(data[1]))
+                                        graphx.append(tiempo)
+                                except ValueError:
+                                        continue
                                 plt.plot(np.array(graphx),np.array(graphtemp),'k-')
                                 ##plt.plot(np.array(graphx),np.array(graphhum),'g-')
                                 plt.show()
                                 plt.pause(0.1)
-                else: # si el archivo no existe espera a que cliques enter, manda la señal de arranque al setup del arduino  y crea la cabecera,
-                
-                        
+                else: # si no acabó la cabecera 
                         input('Wait for Arduino LED and Click Enter')#espera a que el usuario clique enter
-                        ser1.write(bytes('00000001','utf-8')) #envía la señal de arranque alarduino vía puerto serie
+                        ser1.write(b'1') #envía la señal de arranque al arduino vía puerto serie
                         print("Señal de arranque enviada")
-
-                        file1 = open(nombre, 'w') #abre el archivo en modo write (si existe sobreescribe)
+                        if(not(os.path.exists(nombre))):#si el archivo no existe espera a que cliques enter,
+                                
+                                file1 = open(nombre, 'w') #abre el archivo en modo write (si existe sobreescribe)
+                                
+                                file1.write("Dia;       ")        #escribe el día
+                                file1.write(dia) 
+                                file1.close()  
                         
-                        file1.write("Dia;       ")        #escribe el día
-                        file1.write(dia) 
-                        file1.close()  
-                
-                        file1 = open(nombre, 'a') #abre el archivo en modo append
-                        file1.write(";  Hora de Inicio;    ")# escribe la reloj
-                        file1.write(reloj)
-                        file1.write('\n')
-                        file1.close() 
+                                file1 = open(nombre, 'a') #abre el archivo en modo append
+                                file1.write(";  Hora de Inicio;    ")# escribe la reloj
+                                file1.write(reloj)
+                                file1.write('\n')
+                                file1.close()         
                         print("Fecha:   ",dia) #Printea Fecha y reloj de inicio
-                        print("reloj de Inicio:  ",reloj)
-
+                        print("Hora de Inicio:  ",reloj)
                         while cabecera==0: #mientras no se active el flag de cabecera
                                 x=ser1.readline() #lee el serial y guardalo en x
                                 if  x==s : #si x es la señal de final de cabecera
@@ -101,10 +100,18 @@ while (True): #mientras no pulses q
                                 else: #de lo contrario, printea la cabecera
                                         x=x.decode('utf-8') #conviertelo a string
                                         print(x)
-        else:
+        else: 
+                ser1.write(bytes(chr(0),'utf-8'))
+                if(ser1.in_waiting>0):
+                        x=ser1.readline() #lee el serial y guardalo en x
+                        x=x.strip()
+                        x=x.decode('utf-8') #conviertelo a string 
+                        print(reloj) #escribe la reloj en la primera linea   
+                        print(x)
+                        data=x.split(';')
+                        [hora,minuto,segundo]= reloj.split(':')
                 plt.show()
                 plt.pause(1)
-                ser1.write(bytes('00000001','utf-8'))
                       
                         
                                

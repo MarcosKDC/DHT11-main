@@ -15,6 +15,7 @@
                 "c:/Users/Usuario/Documents/PlatformIO/Projects/DHT11/.pio/libdeps/uno/Adafruit Unified Sensor",
                 "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/cores/arduino",
                 "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/variants/standard",
+                "c:/Users/Usuario/Documents/PlatformIO/Projects/DHT11/.pio/libdeps/uno/Unity/src",
                 "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                 "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                 "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
@@ -32,6 +33,7 @@
                     "c:/Users/Usuario/Documents/PlatformIO/Projects/DHT11/.pio/libdeps/uno/Adafruit Unified Sensor",
                     "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/cores/arduino",
                     "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/variants/standard",
+                    "c:/Users/Usuario/Documents/PlatformIO/Projects/DHT11/.pio/libdeps/uno/Unity/src",
                     "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
                     "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/libraries/HID/src",
                     "C:/Users/Usuario/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
@@ -41,7 +43,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=60002",
+                "PLATFORMIO=60100",
                 "ARDUINO_AVR_UNO",
                 "F_CPU=16000000L",
                 "ARDUINO_ARCH_AVR",
