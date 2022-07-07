@@ -111,13 +111,13 @@ while (True): #main loop
         [hora,minuto,segundo]= reloj.split(':')
         tiempo=round(float(hora)+float(minuto)/60+float(segundo)/3600,3)#variable tiempo H,%
         
-        if(keyboard.is_pressed('up')):
+        if(not(on) and keyboard.is_pressed('up')):
                 on=True
                 ser1.reset_output_buffer()
                 ser1.reset_input_buffer()
                 ser1.write(b'1')
 
-        if(keyboard.is_pressed('down') and keyboard.is_pressed('left') and keyboard.is_pressed('right')):
+        if(on and keyboard.is_pressed('down') and keyboard.is_pressed('left') and keyboard.is_pressed('right')):
                 on=False
                 ser1.reset_output_buffer()
                 ser1.reset_input_buffer()
