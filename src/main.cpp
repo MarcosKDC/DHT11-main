@@ -27,7 +27,7 @@
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 uint32_t delayMS;
-  uint8_t flag=0;
+  char RX=0;
   long tiempo=0;
 void setup() {
   Serial.begin(9600);
@@ -35,15 +35,15 @@ void setup() {
   dht.begin(); 
   // Serial.println(F("DHTxx Unified Sensor Example"));
   // Print temperature sensor details.
-  flag=0;
+  RX=0;
   pinMode(LED_BUILTIN, OUTPUT);
 
-  while (flag==0) //while signal not received
+  while (RX==0) //while signal not received
   {
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on     
     if (Serial.available() > 0) { // if there's any incoming byte
-    flag = Serial.read();   // read the incoming byte and assign to flag
-    for (int i=0; i<=5;i++){
+    RX = Serial.read();   // read the incoming byte and assign to RX
+    for (int i=0; i<=5;i++){ //parpadea 
       delay(100);
       digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on 
       delay(100);                       // wait for half a second
@@ -72,19 +72,17 @@ void setup() {
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
   Serial.println(F("11111111")); //Manda la señal de arranque
-  Serial.println(F("Hora [HH:MM:SS]; Temperatura[Celsius];  Humedad[%];  OK?[I/O]"));
-  // Set delay between sensor readings based on sensor details.
-  delayMS = sensor.min_delay/1000;
+  delayMS = sensor.min_delay/1000; // Set delay between sensor readings based on sensor details.
   
 }
 
 void loop() {
-  while(Serial.available()>0){
-      flag=Serial.read();
+  while(Serial.available()>0){//coge el último valor del serial
+      RX=Serial.read();
      }
-      if(flag>=1 && (millis()-tiempo)>delayMS){
+  if((millis()-tiempo)>delayMS){//tiempo de muestreo
+      if(RX=='1'){
           tiempo=millis();
-          delay(delayMS);// Delay between measurements.
           sensors_event_t event;// Get temperature and humidity event
           dht.temperature().getEvent(&event);
           float temp=0;
@@ -112,10 +110,10 @@ void loop() {
               }
           }
       }
-      if(flag==0){
+      if(RX=='0'){
       Serial.print(F("STOP"));
       Serial.print(F(";"));
-      Serial.print(flag);
+      Serial.print(RX);
       Serial.print(F(";"));
       Serial.println(F("0"));
       delay(500);
@@ -123,4 +121,5 @@ void loop() {
       delay(500);                       // wait for half a second
       digitalWrite(LED_BUILTIN, LOW);    // turn the LED off 
       }
+  }
 }
