@@ -15,6 +15,24 @@ ser1 = serial.Serial( #DEFINICIÓN DEL PUERTO SERIe A UTILIZAR
         bytesize=serial.EIGHTBITS,        # Total number of bits to be read
         timeout=1        # Number of serial commands to accept before timing out
 )
+#    ________.__       ____   ____            .__      ___.   .__                 
+#   /  _____/|  |   ___\   \ /   /____ _______|__|____ \_ |__ |  |   ____   ______
+#  /   \  ___|  |  /  _ \   Y   /\__  \\_  __ \  \__  \ | __ \|  | _/ __ \ /  ___/
+#  \    \_\  \  |_(  <_> )     /  / __ \|  | \/  |/ __ \| \_\ \  |_\  ___/ \___ \ 
+#   \______  /____/\____/ \___/  (____  /__|  |__(____  /___  /____/\___  >____  >
+#          \/                         \/              \/    \/          \/     \/ 
+
+#señales y flags
+on=True#bool  de encendido
+fsetup=False#bool  para saber si acabó la setup
+s= "11111111\r\n"#señal de inicio de setup
+s=s.encode("utf-8")#codificamos en bits para la comparación
+tiempo_ant=0
+
+#listas para el plot
+graphx=[] 
+graphtemp=[]
+graphhum=[]
 
 #    _____                        __   .__                         
 #  _/ ____\__ __   ____    ____ _/  |_ |__|  ____    ____    ______
@@ -22,6 +40,7 @@ ser1 = serial.Serial( #DEFINICIÓN DEL PUERTO SERIe A UTILIZAR
 #   |  |  |  |  /|   |  \\  \___ |  |  |  |(  <_> )|   |  \ \___ \ 
 #   |__|  |____/ |___|  / \___  >|__|  |__| \____/ |___|  //____  >
 #                     \/      \/                        \/      \/ 
+
 def inicio():
         ser1.flushOutput()
         ser1.reset_input_buffer()
@@ -49,14 +68,15 @@ def RW(W=False):#leer, y escribir, bien al csv, bien printea
                 x=ser1.readline() #lee el serial y guardalo en x
                 x=x.strip()
                 x=x.decode('utf-8') #convierte x a string
-                if(W):
+                if(W and (tiempo!=tiempo_ant)):
+                        tiempo_ant==tiempo
                         file1 = open(nombre, 'a') #abre el archivo en modo append
                         file1.write(reloj) #escribe la reloj en la primera linea
                         file1.write('; ')    
                         file1.write(x)  #escribe x (datos recibidos de arduino)
                         file1.write('\n')   #siguiente línea
                         file1.close() 
-                        data= x.split(';')
+                        data= x.split(';')                    
                         try:#intenta dibujar
                                 graphtemp.append(float(data[0]))
                                 graphhum.append(float(data[1]))
@@ -80,21 +100,11 @@ def RW(W=False):#leer, y escribir, bien al csv, bien printea
 #  /____  > \___  >|__|  |____/ |   __/ 
 #       \/      \/              |__|   
 
-#señales y flags
-on=True#bool  de encendido
-fsetup=False#bool  para saber si acabó la setup
-s= "11111111\r\n"#señal de inicio de setup
-s=s.encode("utf-8")#codificamos en bits para la comparación
-
-#listas para el plot
-graphx=[] 
-graphtemp=[]
-graphhum=[]
-
 #define el nombre del log
 nombre='logTemperatura'
 nombre=nombre+input('Inserta nombre: ') 
 nombre=nombre+'.csv'
+
 
 plt.ion() #activa el plot
 #  .__                           

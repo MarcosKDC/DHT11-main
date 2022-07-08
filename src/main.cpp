@@ -81,8 +81,8 @@ void loop() {
       RX=Serial.read();
      }
   if((millis()-tiempo)>delayMS){//tiempo de muestreo
-      if(RX=='1'){
-          tiempo=millis();
+      tiempo=millis();
+      if(RX=='1'){        
           sensors_event_t event;// Get temperature and humidity event
           dht.temperature().getEvent(&event);
           float temp=0;
