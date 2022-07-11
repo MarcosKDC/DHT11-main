@@ -68,23 +68,26 @@ def RW(W=False):#leer, y escribir, bien al csv, bien printea
                 x=ser1.readline() #lee el serial y guardalo en x
                 x=x.strip()
                 x=x.decode('utf-8') #convierte x a string
-                if(W and (tiempo!=tiempo_ant)):
-                        tiempo_ant==tiempo
-                        file1 = open(nombre, 'a') #abre el archivo en modo append
-                        file1.write(reloj) #escribe la reloj en la primera linea
-                        file1.write('; ')    
-                        file1.write(x)  #escribe x (datos recibidos de arduino)
-                        file1.write('\n')   #siguiente línea
-                        file1.close() 
-                        data= x.split(';')                    
-                        try:#intenta dibujar
-                                graphtemp.append(float(data[0]))
-                                graphhum.append(float(data[1]))
-                                graphx.append(tiempo)
-                        except ValueError:
-                                continue
-                        plt.plot(np.array(graphx),np.array(graphtemp),'k-') #plotea
-                        ##plt.plot(np.array(graphx),np.array(graphhum),'g-')
+                if(W):
+                        if((tiempo!=tiempo_ant)):
+                                print(tiempo)
+                                tiempo_ant==tiempo
+                                print (tiempo)
+                                file1 = open(nombre, 'a') #abre el archivo en modo append
+                                file1.write(reloj) #escribe la reloj en la primera linea
+                                file1.write('; ')    
+                                file1.write(x)  #escribe x (datos recibidos de arduino)
+                                file1.write('\n')   #siguiente línea
+                                file1.close() 
+                                data= x.split(';')                    
+                                try:#intenta dibujar
+                                        graphtemp.append(float(data[0]))
+                                        graphhum.append(float(data[1]))
+                                        graphx.append(tiempo)
+                                except ValueError:
+                                        continue
+                                plt.plot(np.array(graphx),np.array(graphtemp),'k-') #plotea
+                                ##plt.plot(np.array(graphx),np.array(graphhum),'g-')
                 else:
                         print(reloj) #escribe reloj
                         print(x)#escribe lo que diga el arduinillo
@@ -119,7 +122,7 @@ while (True): #main loop
         dia= date.strftime('%A, %d. %B %Y')#fecha -> dia string
         reloj = date.strftime('%H:%M:%S') #fecha -> reloj string
         [hora,minuto,segundo]= reloj.split(':')
-        tiempo=round(float(hora)+float(minuto)/60+float(segundo)/3600,3)#variable tiempo H,%
+        tiempo=round(float(hora)+float(minuto)/60,3)#variable tiempo H,% (+float(segundo)/3600)
         
         if(keyboard.is_pressed('up')):
                 on=True
