@@ -72,7 +72,7 @@ void setup() {
   Serial.print  (F("Resolution:  ")); Serial.print(sensor.resolution); Serial.println(F("%"));
   Serial.println(F("------------------------------------"));
   Serial.println(F("11111111")); //Manda la señal de arranque
-  delayMS = sensor.min_delay/1000; // Set delay between sensor readings based on sensor details.
+  delayMS = sensor.min_delay/10000; // Set delay between sensor readings based on sensor details.
   
 }
 
