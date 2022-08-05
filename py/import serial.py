@@ -162,10 +162,20 @@ while (True): #main loop
 
         if(fsetup): #si acabó la setup
                 gettime()
+                
                 if((tiempo-tiempo_ant)>tmuestreo):
                         print(round(tiempo_ant,redondeo),'<-Tiempo Anterior || Tiempo Actual ->',round(tiempo,redondeo))
                         tiempo_ant=tiempo
                         RW(on)      #escribes, segun si esta encendido o no una cosa u otra
+                elif((tiempo-tiempo_ant)<0): ##Cambia el día
+                        tiempo_ant=tiempo
+                        file1 = open(nombre, 'a') #abre el archivo en modo write (si existe sobreescribe)
+                        file1.write("Dia;       ")        #escribe el día
+                        file1.write(dia)  
+                        file1.write(";  Hora de Inicio;    ")# escribe la reloj
+                        file1.write(reloj)
+                        file1.write('\n')
+                        file1.close()
                 plt.show()
                 plt.pause(tmuestreo)
         else: # si no acabó la setup aka arduino no ha finalizado el setup
