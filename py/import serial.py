@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 ser1 = serial.Serial( #DEFINICIÓN DEL PUERTO SERIe A UTILIZAR
-        port='COM3',        # Serial Port to read the data from
+        port='COM4',        # Serial Port to read the data from
         baudrate = 9600,        #Rate at which the information is shared to the communication channel
         parity=serial.PARITY_NONE, #Applying Parity Checking (none in this case)
         stopbits=serial.STOPBITS_ONE,       # Pattern of Bits to be read
@@ -133,7 +133,7 @@ def RW(W=False):#leer, y escribir, bien al csv, bien printea
 #       \/      \/              |__|   
 
 #define el nombre del log
-nombre='logTemperatura'
+nombre=os.getcwd()+'\logs\logTemperatura'
 nombre=nombre+input('Inserta nombre: ') 
 nombre=nombre+'.csv'
 
